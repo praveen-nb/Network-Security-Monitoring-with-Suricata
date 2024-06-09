@@ -1,0 +1,48 @@
+# Suricata configuration file
+
+# Global configuration
+vars:
+  # Set your network interface for monitoring
+  interface: eth0
+
+  # Define the logging options
+  default-log-dir: /var/log/suricata/
+
+  # Set up rules directories
+  rule-files:
+    - suricata.rules
+
+# Detection engine configuration
+detection:
+  # Configure the rules
+  # Example: enabling a basic rule set
+  enabled: yes
+  files:
+    - suricata.rules
+
+# Logging configuration
+outputs:
+  # Log alerts to a file
+  - fast:
+      enabled: yes
+      filename: fast.log
+      append: yes
+
+  # Log HTTP requests and responses to files
+  - http:
+      enabled: yes
+      filename: http.log
+      append: yes
+
+# File extraction configuration
+file-store:
+  enabled: yes
+  # Set the directory for storing files
+  dir: /var/log/suricata/files
+
+# EVE JSON output configuration
+eve-log:
+  enabled: yes
+  filetype: json
+  filename: eve.json
+  # Set other options as needed
